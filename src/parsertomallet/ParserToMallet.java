@@ -39,6 +39,7 @@ public class ParserToMallet {
             JSONArray documentos;
             FileWriter fichero = new FileWriter("entradaMallet.txt");
             BufferedWriter pw = new BufferedWriter(fichero);
+            int contador=0;
             
             for (File child : directoryListing) {
                 
@@ -49,7 +50,8 @@ public class ParserToMallet {
                 if (child.getName().equals(".DS_Store")){
                 continue;}
                 documentos = entradaBD.obtieneDocumentos("/bd/"+child.getName());
-                entradaBD.addDocuments(documentos,fichero,pw);
+                contador=entradaBD.addDocuments(documentos,fichero,pw,contador);
+                System.out.println(contador+"");
             }
             fichero.close();
     

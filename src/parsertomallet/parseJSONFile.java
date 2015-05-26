@@ -35,21 +35,28 @@ public class parseJSONFile{
         return arrayObjects;
     };
     
-    public void addDocuments(JSONArray jsonObjects, FileWriter fichero, BufferedWriter pw) throws IOException{
+    public int addDocuments(JSONArray jsonObjects, FileWriter fichero, BufferedWriter pw, int contador) throws IOException{
         
         //FileWriter fichero = null;
         //PrintWriter pw = new PrintWriter(fichero);
             
-        int contador=0; 
+        //int contador=0; 
         String mensaje="";
         for(JSONObject object : (List<JSONObject>) jsonObjects){
             contador++;
+            if (object.containsKey("util")){
+                mensaje=contador+" "+object.get("tipo").toString()+" "+object.get("review/summary").toString()+" "+object.get("util").toString()+"\n"; 
+            }
+            
+            else{
+                mensaje=contador+" "+object.get("tipo").toString()+" "+" "+object.get("review/summary").toString()+" "+object.get("review/text").toString()+"\n";
+            }
          //   String anterior = "";
-            mensaje=contador+" "+object.get("tipo").toString()+" "+object.get("util").toString(); 
-            System.out.println(mensaje);
+            //System.out.println(mensaje);
             pw.write(mensaje);
             pw.flush();
             }
+        return contador;
         }
 
 };
